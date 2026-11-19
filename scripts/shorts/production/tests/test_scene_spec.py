@@ -6,14 +6,15 @@ import pytest
 from scripts.shorts.production.scene_spec import (
     AudioSpec,
     CharacterSpec,
+    CharacterPlacementSpec,
     EnvironmentSpec,
+    EnvironmentAnchorSpec,
     EventSpec,
     ProjectSpec,
     SceneSpec,
     SceneSpecification,
     ShotSpec,
     validate_scene_spec,
-    EnvironmentAnchorSpec,
 )
 
 
@@ -703,3 +704,244 @@ def test_old_specification_without_environment_anchors_still_loads():
     loaded_spec = SceneSpecification.from_dict(data)
 
     assert loaded_spec.environment_anchors == []
+
+
+
+def test_character_placement_can_be_created():
+    placement = CharacterPlacementSpec(
+        id="citizen_01_morning",
+        scene_id="morning",
+        character_id="character_1",
+        anchor_id="house_front_door",
+        start_frame=0,
+        end_frame=45,
+    )
+
+    assert placement.id == "citizen_01_morning"
+    assert placement.scene_id == "morning"
+    assert placement.character_id == "character_1"
+    assert placement.anchor_id == "house_front_door"
+
+
+def test_character_placements_are_serialized():
+    spec = make_valid_spec()
+    spec.environment_anchors = [
+        EnvironmentAnchorSpec(
+            id="house_front_door",
+            environment_id="town",
+            name="House Front Door",
+            description="The main entrance of the house.",
+        )
+    ]
+    spec.character_placements = [
+        CharacterPlacementSpec(
+            id="citizen_01_morning",
+            scene_id="morning",
+            character_id="character_1",
+            anchor_id="house_front_door",
+            start_frame=0,
+            end_frame=45,
+        )
+    ]
+
+    data = spec.to_dict()
+
+    assert data["character_placements"][0]["anchor_id"] == "house_front_door"
+
+
+def test_character_placement_with_unknown_scene_is_rejected():
+    spec = make_valid_spec()
+    spec.environment_anchors = [
+        EnvironmentAnchorSpec(
+            id="house_front_door",
+            environment_id="town",
+            name="House Front Door",
+            description="The main entrance.",
+        )
+    ]
+    spec.character_placements = [
+        CharacterPlacementSpec(
+            id="placement_1",
+            scene_id="missing_scene",
+            character_id="character_1",
+            anchor_id="house_front_door",
+            start_frame=0,
+            end_frame=30,
+        )
+    ]
+
+    errors = validate_scene_spec(spec)
+    assert any("unknown scene" in error.lower() for error in errors)
+
+
+def test_character_placement_with_unknown_character_is_rejected():
+    spec = make_valid_spec()
+    spec.environment_anchors = [
+        EnvironmentAnchorSpec(
+            id="house_front_door",
+            environment_id="town",
+            name="House Front Door",
+            description="The main entrance.",
+        )
+    ]
+    spec.character_placements = [
+        CharacterPlacementSpec(
+            id="placement_1",
+            scene_id="morning",
+            character_id="missing_character",
+            anchor_id="house_front_door",
+            start_frame=0,
+            end_frame=30,
+        )
+    ]
+
+    errors = validate_scene_spec(spec)
+    assert any("unknown character" in error.lower() for error in errors)
+
+
+def test_character_placement_with_unknown_anchor_is_rejected():
+    spec = make_valid_spec()
+    spec.character_placements = [
+        CharacterPlacementSpec(
+            id="placement_1",
+            scene_id="morning",
+            character_id="character_1",
+            anchor_id="missing_anchor",
+            start_frame=0,
+            end_frame=30,
+        )
+    ]
+
+    errors = validate_scene_spec(spec)
+    assert any("unknown anchor" in error.lower() for error in errors)
+
+
+def test_character_placement_anchor_must_belong_to_scene_environment():
+    spec = make_valid_spec()
+    spec.environments.append(
+        EnvironmentSpec(
+            id="park",
+            name="Park",
+            description="A public park.",
+        )
+    )
+    spec.environment_anchors = [
+        EnvironmentAnchorSpec(
+            id="park_bench",
+            environment_id="park",
+            name="Park Bench",
+            description="A bench in the park.",
+        )
+    ]
+    spec.character_placements = [
+        CharacterPlacementSpec(
+            id="placement_1",
+            scene_id="morning",
+            character_id="character_1",
+            anchor_id="park_bench",
+            start_frame=0,
+            end_frame=30,
+        )
+    ]
+
+    errors = validate_scene_spec(spec)
+    assert any("environment" in error.lower() for error in errors)
+
+
+def test_character_placement_outside_scene_is_rejected():
+    spec = make_valid_spec()
+    spec.environment_anchors = [
+        EnvironmentAnchorSpec(
+            id="house_front_door",
+            environment_id="town",
+            name="House Front Door",
+            description="The main entrance.",
+        )
+    ]
+    spec.character_placements = [
+        CharacterPlacementSpec(
+            id="placement_1",
+            scene_id="morning",
+            character_id="character_1",
+            anchor_id="house_front_door",
+            start_frame=0,
+            end_frame=100,
+        )
+    ]
+
+    errors = validate_scene_spec(spec)
+    assert any("outside" in error.lower() for error in errors)
+
+
+def test_overlapping_character_placements_are_rejected():
+    spec = make_valid_spec()
+    spec.environment_anchors = [
+        EnvironmentAnchorSpec(
+            id="house_front_door",
+            environment_id="town",
+            name="House Front Door",
+            description="The main entrance.",
+        ),
+        EnvironmentAnchorSpec(
+            id="town_square",
+            environment_id="town",
+            name="Town Square",
+            description="The central town square.",
+        ),
+    ]
+    spec.character_placements = [
+        CharacterPlacementSpec(
+            id="placement_1",
+            scene_id="morning",
+            character_id="character_1",
+            anchor_id="house_front_door",
+            start_frame=0,
+            end_frame=40,
+        ),
+        CharacterPlacementSpec(
+            id="placement_2",
+            scene_id="morning",
+            character_id="character_1",
+            anchor_id="town_square",
+            start_frame=30,
+            end_frame=60,
+        ),
+    ]
+
+    errors = validate_scene_spec(spec)
+    assert any("overlap" in error.lower() for error in errors)
+
+
+def test_character_placement_json_round_trip():
+    spec = make_valid_spec()
+    spec.environment_anchors = [
+        EnvironmentAnchorSpec(
+            id="house_front_door",
+            environment_id="town",
+            name="House Front Door",
+            description="The main entrance.",
+        )
+    ]
+    spec.character_placements = [
+        CharacterPlacementSpec(
+            id="placement_1",
+            scene_id="morning",
+            character_id="character_1",
+            anchor_id="house_front_door",
+            start_frame=0,
+            end_frame=45,
+        )
+    ]
+
+    loaded_spec = SceneSpecification.from_dict(spec.to_dict())
+
+    assert loaded_spec == spec
+
+
+def test_old_specification_without_character_placements_still_loads():
+    data = make_valid_spec().to_dict()
+    data.pop("character_placements", None)
+
+    loaded_spec = SceneSpecification.from_dict(data)
+
+    assert loaded_spec.character_placements == []

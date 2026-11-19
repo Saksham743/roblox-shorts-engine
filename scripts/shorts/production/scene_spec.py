@@ -116,6 +116,18 @@ class EnvironmentAnchorSpec:
 
 
 @dataclass
+class CharacterPlacementSpec:
+    """Defines where a character is staged during part of a scene."""
+
+    id: str
+    scene_id: str
+    character_id: str
+    anchor_id: str
+    start_frame: int
+    end_frame: int
+
+
+@dataclass
 class SceneSpec:
     id: str
     name: str
@@ -185,6 +197,7 @@ class SceneSpecification:
     events: list[EventSpec]
     shots: list[ShotSpec]
     environment_anchors: list[EnvironmentAnchorSpec] = field(default_factory=list)
+    character_placements: list[CharacterPlacementSpec] = field(default_factory=list)
     audio: AudioSpec = field(default_factory=AudioSpec)
     schema_version: str = SCENE_SPEC_VERSION
 
@@ -226,6 +239,7 @@ class SceneSpecification:
             "events",
             "shots",
             "environment_anchors",
+            "character_placements",
             "audio",
             "schema_version",
         }
@@ -461,6 +475,12 @@ class SceneSpecification:
             "environment_anchors",
         )
 
+        character_placements = build_record_list(
+            CharacterPlacementSpec,
+            data.get("character_placements", []),
+            "character_placements",
+        )
+
         scenes = build_record_list(
             SceneSpec,
             data["scenes"],
@@ -513,6 +533,7 @@ class SceneSpecification:
             events=events,
             shots=shots,
             environment_anchors=environment_anchors,
+            character_placements=character_placements,
             audio=audio,
             schema_version=schema_version,
         )
@@ -770,6 +791,13 @@ def validate_scene_spec(
             f"Environment anchor '{anchor.id}' description",
         )
 
+    for placement in spec.character_placements:
+        check_frame_range(
+            placement.start_frame,
+            placement.end_frame,
+            f"Character placement '{placement.id}'",
+        )
+
     for scene in spec.scenes:
 
         check_non_empty_text(
@@ -825,6 +853,10 @@ def validate_scene_spec(
         "environment anchors",
     )
     check_unique_ids(
+        spec.character_placements,
+        "character placements",
+    )
+    check_unique_ids(
         spec.audio.sound_effects,
         "sound effects",
     )
@@ -850,6 +882,9 @@ def validate_scene_spec(
 
     for item in spec.environment_anchors:
         check_non_empty_id(item, "Environment anchor")
+
+    for item in spec.character_placements:
+        check_non_empty_id(item, "Character placement")
 
     for item in spec.audio.sound_effects:
         check_non_empty_id(item, "Sound effect")
@@ -904,6 +939,11 @@ def validate_scene_spec(
         for scene in spec.scenes
     }
 
+    anchor_by_id = {
+        anchor.id: anchor
+        for anchor in spec.environment_anchors
+    }
+
     # -------------------------------------------------------------
     # Scene validation
     # -------------------------------------------------------------
@@ -926,6 +966,76 @@ def validate_scene_spec(
         spec.scenes,
         "Scene",
     )
+
+    # -------------------------------------------------------------
+    # Character placement validation
+    # -------------------------------------------------------------
+
+    placements_by_character_and_scene: dict[tuple[str, str], list[Any]] = {}
+
+    for placement in spec.character_placements:
+        parent_scene = scene_by_id.get(placement.scene_id)
+
+        if parent_scene is None:
+            errors.append(
+                f"Character placement '{placement.id}' references "
+                f"unknown scene '{placement.scene_id}'."
+            )
+        elif (
+            placement.start_frame < parent_scene.start_frame
+            or placement.end_frame > parent_scene.end_frame
+        ):
+            errors.append(
+                f"Character placement '{placement.id}' falls outside "
+                f"scene '{parent_scene.id}'."
+            )
+
+        if placement.character_id not in character_ids:
+            errors.append(
+                f"Character placement '{placement.id}' references "
+                f"unknown character '{placement.character_id}'."
+            )
+
+        anchor = anchor_by_id.get(placement.anchor_id)
+
+        if anchor is None:
+            errors.append(
+                f"Character placement '{placement.id}' references "
+                f"unknown anchor '{placement.anchor_id}'."
+            )
+        elif parent_scene is not None and (
+            anchor.environment_id != parent_scene.environment_id
+        ):
+            errors.append(
+                f"Character placement '{placement.id}' uses anchor "
+                f"'{anchor.id}' from environment '{anchor.environment_id}', "
+                f"but scene '{parent_scene.id}' uses environment "
+                f"'{parent_scene.environment_id}'."
+            )
+
+        key = (placement.scene_id, placement.character_id)
+        placements_by_character_and_scene.setdefault(key, []).append(
+            placement
+        )
+
+    for (scene_id, character_id), placements in (
+        placements_by_character_and_scene.items()
+    ):
+        ordered_placements = sorted(
+            placements,
+            key=lambda item: (item.start_frame, item.end_frame, item.id),
+        )
+
+        for previous, current in zip(
+            ordered_placements,
+            ordered_placements[1:],
+        ):
+            if current.start_frame < previous.end_frame:
+                errors.append(
+                    f"Character placements '{previous.id}' and "
+                    f"'{current.id}' overlap for character "
+                    f"'{character_id}' in scene '{scene_id}'."
+                )
 
     # -------------------------------------------------------------
     # Event validation
