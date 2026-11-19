@@ -1,0 +1,48 @@
+﻿# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+dist/
+build/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Generated videos, renders and temporary output
+out/
+renders/
+temp/
+tmp/
+*.mp4
+*.mov
+*.wav
+*.mp3
+
+# Model weights and caches
+models/
+.cache/
+huggingface_cache/
+
+# Logs
+*.log
+logs/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Reference videos (kept locally)
+references/

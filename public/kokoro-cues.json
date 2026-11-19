@@ -1,0 +1,596 @@
+{
+  "durationSeconds": 54.55,
+  "durationInFrames": 1637,
+  "beatTimings": {
+    "b1": {
+      "startSec": 0.15,
+      "endSec": 3.431,
+      "startFrame": 4,
+      "endFrame": 103,
+      "text": "In this town, whatever the teacher writes on the chalkboard comes true."
+    },
+    "b2": {
+      "startSec": 3.571,
+      "endSec": 6.972,
+      "startFrame": 107,
+      "endFrame": 209,
+      "text": "Our teacher, Mrs. Vale, writes one rule every single morning."
+    },
+    "b3": {
+      "startSec": 7.052,
+      "endSec": 9.69,
+      "startFrame": 212,
+      "endFrame": 291,
+      "text": "Last week she wrote NO TALKING, and the room went silent."
+    },
+    "b4": {
+      "startSec": 9.79,
+      "endSec": 12.981,
+      "startFrame": 294,
+      "endFrame": 389,
+      "text": "Then she wrote EVERYONE DANCES, and nobody could stop dancing."
+    },
+    "w1": {
+      "startSec": 13.081,
+      "endSec": 13.723,
+      "startFrame": 392,
+      "endFrame": 412,
+      "text": "DANCE!"
+    },
+    "b5": {
+      "startSec": 13.843,
+      "endSec": 17.231,
+      "startFrame": 415,
+      "endFrame": 517,
+      "text": "Nobody ever touches the chalk, and nobody erases that board."
+    },
+    "b6": {
+      "startSec": 17.311,
+      "endSec": 20.674,
+      "startFrame": 519,
+      "endFrame": 620,
+      "text": "But my little brother Noah was so tired, he fell asleep standing up."
+    },
+    "b7": {
+      "startSec": 20.794,
+      "endSec": 23.565,
+      "startFrame": 624,
+      "endFrame": 707,
+      "text": "Mrs. Vale smiled and wrote one soft word: SLEEP."
+    },
+    "b8": {
+      "startSec": 23.685,
+      "endSec": 26.107,
+      "startFrame": 711,
+      "endFrame": 783,
+      "text": "Noah woke up, marched to the board, and wiped it away."
+    },
+    "b9": {
+      "startSec": 26.207,
+      "endSec": 29.095,
+      "startFrame": 786,
+      "endFrame": 873,
+      "text": "The board went black, then the chalk started writing by itself."
+    },
+    "w2": {
+      "startSec": 29.235,
+      "endSec": 29.832,
+      "startFrame": 877,
+      "endFrame": 895,
+      "text": "NOAH!"
+    },
+    "b10": {
+      "startSec": 29.952,
+      "endSec": 33.039,
+      "startFrame": 899,
+      "endFrame": 991,
+      "text": "It wrote NOAH, then DETENTION, then one last word: FOREVER."
+    },
+    "b11": {
+      "startSec": 33.199,
+      "endSec": 36.38,
+      "startFrame": 996,
+      "endFrame": 1091,
+      "text": "Next morning, Noah's seat was empty, and nobody remembered him."
+    },
+    "b12": {
+      "startSec": 36.54,
+      "endSec": 39.275,
+      "startFrame": 1096,
+      "endFrame": 1178,
+      "text": "I ran outside, and the school sign now read NOAH WHO?"
+    },
+    "b13": {
+      "startSec": 39.395,
+      "endSec": 42.201,
+      "startFrame": 1182,
+      "endFrame": 1266,
+      "text": "So I grabbed the chalk and wrote the only thing I had left."
+    },
+    "b14": {
+      "startSec": 42.321,
+      "endSec": 44.849,
+      "startFrame": 1270,
+      "endFrame": 1345,
+      "text": "The board answered slowly: ONLY THE TEACHER WRITES."
+    },
+    "w3": {
+      "startSec": 45.009,
+      "endSec": 45.709,
+      "startFrame": 1350,
+      "endFrame": 1371,
+      "text": "ERASE!"
+    },
+    "b15": {
+      "startSec": 45.829,
+      "endSec": 48.615,
+      "startFrame": 1375,
+      "endFrame": 1458,
+      "text": "So I erased every rule, one chalk line at a time."
+    },
+    "b16": {
+      "startSec": 48.715,
+      "endSec": 53.846,
+      "startFrame": 1461,
+      "endFrame": 1615,
+      "text": "Noah walked back in, every word disappeared, and one line appeared: TODAY'S RULE. What would you write?"
+    }
+  },
+  "captions": [
+    {
+      "startFrame": 4,
+      "endFrame": 14,
+      "text": "In this"
+    },
+    {
+      "startFrame": 15,
+      "endFrame": 35,
+      "text": "town, whatever"
+    },
+    {
+      "startFrame": 36,
+      "endFrame": 51,
+      "text": "the teacher"
+    },
+    {
+      "startFrame": 52,
+      "endFrame": 71,
+      "text": "writes on the"
+    },
+    {
+      "startFrame": 72,
+      "endFrame": 94,
+      "text": "chalkboard comes"
+    },
+    {
+      "startFrame": 95,
+      "endFrame": 102,
+      "text": "true."
+    },
+    {
+      "startFrame": 107,
+      "endFrame": 128,
+      "text": "Our teacher,"
+    },
+    {
+      "startFrame": 129,
+      "endFrame": 146,
+      "text": "Mrs. Vale,"
+    },
+    {
+      "startFrame": 147,
+      "endFrame": 163,
+      "text": "writes one"
+    },
+    {
+      "startFrame": 164,
+      "endFrame": 181,
+      "text": "rule every"
+    },
+    {
+      "startFrame": 182,
+      "endFrame": 208,
+      "text": "single morning."
+    },
+    {
+      "startFrame": 212,
+      "endFrame": 224,
+      "text": "Last week"
+    },
+    {
+      "startFrame": 225,
+      "endFrame": 238,
+      "text": "she wrote"
+    },
+    {
+      "startFrame": 239,
+      "endFrame": 255,
+      "text": "NO TALKING,"
+    },
+    {
+      "startFrame": 256,
+      "endFrame": 265,
+      "text": "and the"
+    },
+    {
+      "startFrame": 266,
+      "endFrame": 279,
+      "text": "room went"
+    },
+    {
+      "startFrame": 280,
+      "endFrame": 290,
+      "text": "silent."
+    },
+    {
+      "startFrame": 294,
+      "endFrame": 306,
+      "text": "Then she"
+    },
+    {
+      "startFrame": 307,
+      "endFrame": 329,
+      "text": "wrote EVERYONE"
+    },
+    {
+      "startFrame": 330,
+      "endFrame": 347,
+      "text": "DANCES, and"
+    },
+    {
+      "startFrame": 348,
+      "endFrame": 367,
+      "text": "nobody could"
+    },
+    {
+      "startFrame": 368,
+      "endFrame": 388,
+      "text": "stop dancing."
+    },
+    {
+      "startFrame": 392,
+      "endFrame": 415,
+      "text": "DANCE!"
+    },
+    {
+      "startFrame": 415,
+      "endFrame": 434,
+      "text": "Nobody ever"
+    },
+    {
+      "startFrame": 435,
+      "endFrame": 454,
+      "text": "touches the"
+    },
+    {
+      "startFrame": 455,
+      "endFrame": 472,
+      "text": "chalk, and"
+    },
+    {
+      "startFrame": 473,
+      "endFrame": 496,
+      "text": "nobody erases"
+    },
+    {
+      "startFrame": 497,
+      "endFrame": 516,
+      "text": "that board."
+    },
+    {
+      "startFrame": 519,
+      "endFrame": 539,
+      "text": "But my little"
+    },
+    {
+      "startFrame": 540,
+      "endFrame": 558,
+      "text": "brother Noah"
+    },
+    {
+      "startFrame": 559,
+      "endFrame": 579,
+      "text": "was so tired,"
+    },
+    {
+      "startFrame": 580,
+      "endFrame": 590,
+      "text": "he fell"
+    },
+    {
+      "startFrame": 591,
+      "endFrame": 614,
+      "text": "asleep standing"
+    },
+    {
+      "startFrame": 615,
+      "endFrame": 619,
+      "text": "up."
+    },
+    {
+      "startFrame": 624,
+      "endFrame": 640,
+      "text": "Mrs. Vale"
+    },
+    {
+      "startFrame": 641,
+      "endFrame": 659,
+      "text": "smiled and"
+    },
+    {
+      "startFrame": 660,
+      "endFrame": 676,
+      "text": "wrote one"
+    },
+    {
+      "startFrame": 677,
+      "endFrame": 695,
+      "text": "soft word:"
+    },
+    {
+      "startFrame": 696,
+      "endFrame": 706,
+      "text": "SLEEP."
+    },
+    {
+      "startFrame": 711,
+      "endFrame": 723,
+      "text": "Noah woke"
+    },
+    {
+      "startFrame": 724,
+      "endFrame": 739,
+      "text": "up, marched"
+    },
+    {
+      "startFrame": 740,
+      "endFrame": 747,
+      "text": "to the"
+    },
+    {
+      "startFrame": 748,
+      "endFrame": 762,
+      "text": "board, and"
+    },
+    {
+      "startFrame": 763,
+      "endFrame": 782,
+      "text": "wiped it away."
+    },
+    {
+      "startFrame": 786,
+      "endFrame": 798,
+      "text": "The board"
+    },
+    {
+      "startFrame": 799,
+      "endFrame": 815,
+      "text": "went black,"
+    },
+    {
+      "startFrame": 816,
+      "endFrame": 826,
+      "text": "then the"
+    },
+    {
+      "startFrame": 827,
+      "endFrame": 845,
+      "text": "chalk started"
+    },
+    {
+      "startFrame": 846,
+      "endFrame": 872,
+      "text": "writing by itself."
+    },
+    {
+      "startFrame": 877,
+      "endFrame": 898,
+      "text": "NOAH!"
+    },
+    {
+      "startFrame": 899,
+      "endFrame": 911,
+      "text": "It wrote"
+    },
+    {
+      "startFrame": 912,
+      "endFrame": 928,
+      "text": "NOAH, then"
+    },
+    {
+      "startFrame": 929,
+      "endFrame": 953,
+      "text": "DETENTION, then"
+    },
+    {
+      "startFrame": 954,
+      "endFrame": 967,
+      "text": "one last"
+    },
+    {
+      "startFrame": 968,
+      "endFrame": 990,
+      "text": "word: FOREVER."
+    },
+    {
+      "startFrame": 996,
+      "endFrame": 1016,
+      "text": "Next morning,"
+    },
+    {
+      "startFrame": 1017,
+      "endFrame": 1034,
+      "text": "Noah's seat"
+    },
+    {
+      "startFrame": 1035,
+      "endFrame": 1050,
+      "text": "was empty,"
+    },
+    {
+      "startFrame": 1051,
+      "endFrame": 1066,
+      "text": "and nobody"
+    },
+    {
+      "startFrame": 1067,
+      "endFrame": 1090,
+      "text": "remembered him."
+    },
+    {
+      "startFrame": 1096,
+      "endFrame": 1104,
+      "text": "I ran"
+    },
+    {
+      "startFrame": 1105,
+      "endFrame": 1124,
+      "text": "outside, and"
+    },
+    {
+      "startFrame": 1125,
+      "endFrame": 1141,
+      "text": "the school"
+    },
+    {
+      "startFrame": 1142,
+      "endFrame": 1155,
+      "text": "sign now"
+    },
+    {
+      "startFrame": 1156,
+      "endFrame": 1170,
+      "text": "read NOAH"
+    },
+    {
+      "startFrame": 1171,
+      "endFrame": 1177,
+      "text": "WHO?"
+    },
+    {
+      "startFrame": 1182,
+      "endFrame": 1200,
+      "text": "So I grabbed"
+    },
+    {
+      "startFrame": 1201,
+      "endFrame": 1214,
+      "text": "the chalk"
+    },
+    {
+      "startFrame": 1215,
+      "endFrame": 1228,
+      "text": "and wrote"
+    },
+    {
+      "startFrame": 1229,
+      "endFrame": 1240,
+      "text": "the only"
+    },
+    {
+      "startFrame": 1241,
+      "endFrame": 1257,
+      "text": "thing I had"
+    },
+    {
+      "startFrame": 1258,
+      "endFrame": 1265,
+      "text": "left."
+    },
+    {
+      "startFrame": 1270,
+      "endFrame": 1283,
+      "text": "The board"
+    },
+    {
+      "startFrame": 1284,
+      "endFrame": 1308,
+      "text": "answered slowly:"
+    },
+    {
+      "startFrame": 1309,
+      "endFrame": 1321,
+      "text": "ONLY THE"
+    },
+    {
+      "startFrame": 1322,
+      "endFrame": 1344,
+      "text": "TEACHER WRITES."
+    },
+    {
+      "startFrame": 1350,
+      "endFrame": 1374,
+      "text": "ERASE!"
+    },
+    {
+      "startFrame": 1375,
+      "endFrame": 1394,
+      "text": "So I erased"
+    },
+    {
+      "startFrame": 1395,
+      "endFrame": 1415,
+      "text": "every rule,"
+    },
+    {
+      "startFrame": 1416,
+      "endFrame": 1431,
+      "text": "one chalk"
+    },
+    {
+      "startFrame": 1432,
+      "endFrame": 1448,
+      "text": "line at a"
+    },
+    {
+      "startFrame": 1449,
+      "endFrame": 1457,
+      "text": "time."
+    },
+    {
+      "startFrame": 1461,
+      "endFrame": 1478,
+      "text": "Noah walked"
+    },
+    {
+      "startFrame": 1479,
+      "endFrame": 1491,
+      "text": "back in,"
+    },
+    {
+      "startFrame": 1492,
+      "endFrame": 1507,
+      "text": "every word"
+    },
+    {
+      "startFrame": 1508,
+      "endFrame": 1533,
+      "text": "disappeared, and"
+    },
+    {
+      "startFrame": 1534,
+      "endFrame": 1546,
+      "text": "one line"
+    },
+    {
+      "startFrame": 1547,
+      "endFrame": 1574,
+      "text": "appeared: TODAY'S"
+    },
+    {
+      "startFrame": 1575,
+      "endFrame": 1590,
+      "text": "RULE. What"
+    },
+    {
+      "startFrame": 1591,
+      "endFrame": 1605,
+      "text": "would you"
+    },
+    {
+      "startFrame": 1606,
+      "endFrame": 1614,
+      "text": "write?"
+    }
+  ]
+}
