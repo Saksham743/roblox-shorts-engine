@@ -106,6 +106,16 @@ class EnvironmentSpec:
 
 
 @dataclass
+class EnvironmentAnchorSpec:
+    """A named reference location inside an environment."""
+
+    id: str
+    environment_id: str
+    name: str
+    description: str
+
+
+@dataclass
 class SceneSpec:
     id: str
     name: str
@@ -174,6 +184,7 @@ class SceneSpecification:
     scenes: list[SceneSpec]
     events: list[EventSpec]
     shots: list[ShotSpec]
+    environment_anchors: list[EnvironmentAnchorSpec] = field(default_factory=list)
     audio: AudioSpec = field(default_factory=AudioSpec)
     schema_version: str = SCENE_SPEC_VERSION
 
@@ -214,6 +225,7 @@ class SceneSpecification:
             "scenes",
             "events",
             "shots",
+            "environment_anchors",
             "audio",
             "schema_version",
         }
@@ -443,6 +455,12 @@ class SceneSpecification:
             "environments",
         )
 
+        environment_anchors = build_record_list(
+            EnvironmentAnchorSpec,
+            data.get("environment_anchors", []),
+            "environment_anchors",
+        )
+
         scenes = build_record_list(
             SceneSpec,
             data["scenes"],
@@ -494,6 +512,7 @@ class SceneSpecification:
             scenes=scenes,
             events=events,
             shots=shots,
+            environment_anchors=environment_anchors,
             audio=audio,
             schema_version=schema_version,
         )
@@ -739,6 +758,18 @@ def validate_scene_spec(
             f"Environment '{environment.id}' type",
         )
 
+    for anchor in spec.environment_anchors:
+
+        check_non_empty_text(
+            anchor.name,
+            f"Environment anchor '{anchor.id}' name",
+        )
+
+        check_non_empty_text(
+            anchor.description,
+            f"Environment anchor '{anchor.id}' description",
+        )
+
     for scene in spec.scenes:
 
         check_non_empty_text(
@@ -790,6 +821,10 @@ def validate_scene_spec(
     check_unique_ids(spec.events, "events")
     check_unique_ids(spec.shots, "shots")
     check_unique_ids(
+        spec.environment_anchors,
+        "environment anchors",
+    )
+    check_unique_ids(
         spec.audio.sound_effects,
         "sound effects",
     )
@@ -812,6 +847,9 @@ def validate_scene_spec(
 
     for item in spec.shots:
         check_non_empty_id(item, "Shot")
+
+    for item in spec.environment_anchors:
+        check_non_empty_id(item, "Environment anchor")
 
     for item in spec.audio.sound_effects:
         check_non_empty_id(item, "Sound effect")
@@ -853,6 +891,13 @@ def validate_scene_spec(
         environment.id
         for environment in spec.environments
     }
+
+    for anchor in spec.environment_anchors:
+        if anchor.environment_id not in environment_ids:
+            errors.append(
+                f"Environment anchor '{anchor.id}' references "
+                f"unknown environment '{anchor.environment_id}'."
+            )
 
     scene_by_id = {
         scene.id: scene

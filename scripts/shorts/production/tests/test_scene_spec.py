@@ -13,6 +13,7 @@ from scripts.shorts.production.scene_spec import (
     SceneSpecification,
     ShotSpec,
     validate_scene_spec,
+    EnvironmentAnchorSpec,
 )
 
 
@@ -606,3 +607,99 @@ def test_valid_time_of_day_values_are_accepted():
     for value in valid_values:
         spec.scenes[0].time_of_day = value
         assert validate_scene_spec(spec) == []
+
+
+def test_environment_anchor_can_be_created():
+    anchor = EnvironmentAnchorSpec(
+        id="shop_entrance",
+        environment_id="town",
+        name="Shop Entrance",
+        description="The entrance of the main town shop.",
+    )
+
+    assert anchor.id == "shop_entrance"
+    assert anchor.environment_id == "town"
+    assert anchor.name == "Shop Entrance"
+
+
+def test_environment_anchors_are_serialized():
+    spec = make_valid_spec()
+
+    spec.environment_anchors = [
+        EnvironmentAnchorSpec(
+            id="house_front_door",
+            environment_id="town",
+            name="House Front Door",
+            description="The main entrance of the house.",
+        )
+    ]
+
+    data = spec.to_dict()
+
+    assert data["environment_anchors"][0]["id"] == "house_front_door"
+
+
+def test_environment_anchor_with_unknown_environment_is_rejected():
+    spec = make_valid_spec()
+
+    spec.environment_anchors = [
+        EnvironmentAnchorSpec(
+            id="shop_entrance",
+            environment_id="missing_environment",
+            name="Shop Entrance",
+            description="The shop entrance.",
+        )
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert any("unknown environment" in error.lower() for error in errors)
+
+
+def test_duplicate_environment_anchor_ids_are_rejected():
+    spec = make_valid_spec()
+
+    spec.environment_anchors = [
+        EnvironmentAnchorSpec(
+            id="shop_entrance",
+            environment_id="town",
+            name="Shop Entrance",
+            description="The shop entrance.",
+        ),
+        EnvironmentAnchorSpec(
+            id="shop_entrance",
+            environment_id="town",
+            name="Shop Entrance Alternate",
+            description="Another description.",
+        ),
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert any("duplicate ID" in error for error in errors)
+
+
+def test_environment_anchor_json_round_trip():
+    spec = make_valid_spec()
+
+    spec.environment_anchors = [
+        EnvironmentAnchorSpec(
+            id="shop_entrance",
+            environment_id="town",
+            name="Shop Entrance",
+            description="The shop entrance.",
+        )
+    ]
+
+    loaded_spec = SceneSpecification.from_dict(spec.to_dict())
+
+    assert loaded_spec == spec
+
+
+def test_old_specification_without_environment_anchors_still_loads():
+    data = make_valid_spec().to_dict()
+    data.pop("environment_anchors", None)
+
+    loaded_spec = SceneSpecification.from_dict(data)
+
+    assert loaded_spec.environment_anchors == []
