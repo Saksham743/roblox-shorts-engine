@@ -14,6 +14,8 @@ from scripts.shorts.production.animation import (
 )
 from scripts.shorts.production.scene_spec import CharacterActionSpec
 
+from scripts.shorts.production.animation.semantic_catalog import build_default_catalog
+
 
 def make_action(**overrides):
     values = dict(
@@ -44,10 +46,12 @@ def make_animation(**overrides):
 
 def make_profile(**overrides):
     values = dict(
-        character_id="char_1", rig_type="R15",
+        character_id="char_1",
+        rig_type="R15",
         supported_channels=["locomotion"],
         supported_semantic_ids=["locomotion.walk.relaxed"],
-        procedural_capabilities=["locomotion.walk.relaxed"],
+        supported_capabilities=["basic_locomotion"],
+        procedural_capabilities=["basic_locomotion"],
     )
     values.update(overrides)
     return CharacterCapabilityProfile(**values)
@@ -189,6 +193,114 @@ def test_capability_profile_validation_rejects_duplicates():
     from scripts.shorts.production.animation import validate_capability_profile
     assert any("duplicates" in error for error in validate_capability_profile(profile))
 
+def test_capability_profile_validation_checks_supported_capabilities():
+    from scripts.shorts.production.animation import validate_capability_profile
+
+    profile = make_profile(
+        supported_capabilities=["basic_locomotion", "basic_locomotion"]
+    )
+
+    assert any(
+        "supported_capabilities" in error and "duplicates" in error
+        for error in validate_capability_profile(profile)
+    )
+
+
+def test_clip_requires_physical_rig_capabilities():
+    profile = make_profile(supported_capabilities=[])
+
+    errors = validate_animation_plan(
+        [make_action()],
+        [make_animation()],
+        [profile],
+    )
+
+    assert any("basic_locomotion" in error for error in errors)
+
+
+def test_procedural_motion_requires_physical_rig_capabilities():
+    animation = make_animation(
+        motion=AnimationMotionSpec(
+            "locomotion.walk.relaxed",
+            "procedural",
+            "Generate a relaxed walk.",
+        )
+    )
+
+    profile = make_profile(supported_capabilities=[])
+
+    errors = validate_animation_plan(
+        [make_action()],
+        [animation],
+        [profile],
+    )
+
+    assert any("basic_locomotion" in error for error in errors)
+
+
+def test_procedural_motion_requires_executor_capabilities():
+    animation = make_animation(
+        motion=AnimationMotionSpec(
+            "locomotion.walk.relaxed",
+            "procedural",
+            "Generate a relaxed walk.",
+        )
+    )
+
+    profile = make_profile(procedural_capabilities=[])
+
+    errors = validate_animation_plan(
+        [make_action()],
+        [animation],
+        [profile],
+    )
+
+    assert any("procedural" in error.lower() for error in errors)
+
+
+def test_clip_does_not_require_procedural_executor():
+    profile = make_profile(procedural_capabilities=[])
+
+    assert validate_animation_plan(
+        [make_action()],
+        [make_animation()],
+        [profile],
+    ) == []
+
+
+def test_unknown_semantic_animation_is_rejected():
+    animation = make_animation(
+        motion=AnimationMotionSpec(
+            "locomotion.teleport",
+            "clip",
+            "Teleport instantly.",
+        )
+    )
+
+    errors = validate_animation_plan(
+        [make_action()],
+        [animation],
+        [make_profile()],
+    )
+
+    assert any("unknown semantic" in error.lower() for error in errors)
+
+
+def test_default_catalog_can_be_supplied_to_animation_plan():
+    animation = make_animation(
+        motion=AnimationMotionSpec(
+            "locomotion.walk.relaxed",
+            "clip",
+            "Walk naturally.",
+        )
+    )
+
+    assert validate_animation_plan(
+        [make_action()],
+        [animation],
+        [make_profile()],
+        registry=build_default_catalog(),
+    ) == []
 
 def test_plan_requires_one_output_per_action():
     errors = validate_animation_plan([make_action()], [])
@@ -232,7 +344,7 @@ def test_plan_rejects_missing_procedural_capability():
     ))
     profile = make_profile(procedural_capabilities=[])
     errors = validate_animation_plan([make_action()], [animation], [profile])
-    assert any("lacks procedural capability" in error for error in errors)
+    assert any("procedural" in error.lower() for error in errors)
 
 
 def test_plan_rejects_unsupported_channel_from_profile():
@@ -269,6 +381,16 @@ def test_plan_allows_multiple_channels_for_same_character():
     locomotion = make_action(id="walk", channel="locomotion")
     facial = make_action(id="talk", action="talk", channel="facial")
     walk_animation = make_animation(action_id="walk")
-    talk_animation = make_animation(id="animation_talk", action_id="talk", channel="facial", motion=AnimationMotionSpec("facial.talk", "clip", "Talk."))
-    profile = make_profile(supported_channels=["locomotion", "facial"], supported_semantic_ids=["locomotion.walk.relaxed", "facial.talk"])
+    talk_animation = make_animation(id="animation_talk", action_id="talk", channel="facial", motion=AnimationMotionSpec("facial.smile", "clip", "Smile."))
+    profile = make_profile(
+            supported_channels=["locomotion", "facial"],
+            supported_semantic_ids=[
+                "locomotion.walk.relaxed",
+                "facial.smile",
+            ],
+            supported_capabilities=[
+                "basic_locomotion",
+                "facial_expression",
+            ],
+        )
     assert validate_animation_plan([locomotion, facial], [walk_animation, talk_animation], [profile]) == []

@@ -1,596 +1,586 @@
 {
-  "durationSeconds": 54.55,
-  "durationInFrames": 1637,
+  "durationSeconds": 46.42,
+  "durationInFrames": 1393,
   "beatTimings": {
     "b1": {
       "startSec": 0.15,
-      "endSec": 3.431,
+      "endSec": 4.363,
       "startFrame": 4,
-      "endFrame": 103,
-      "text": "In this town, whatever the teacher writes on the chalkboard comes true."
+      "endFrame": 131,
+      "text": "In this town, three kids race for one ticket out. The winner saves one family."
     },
     "b2": {
-      "startSec": 3.571,
-      "endSec": 6.972,
-      "startFrame": 107,
-      "endFrame": 209,
-      "text": "Our teacher, Mrs. Vale, writes one rule every single morning."
+      "startSec": 4.442,
+      "endSec": 6.756,
+      "startFrame": 133,
+      "endFrame": 203,
+      "text": "The other two are sent away. This year, I was one."
     },
     "b3": {
-      "startSec": 7.052,
-      "endSec": 9.69,
-      "startFrame": 212,
-      "endFrame": 291,
-      "text": "Last week she wrote NO TALKING, and the room went silent."
+      "startSec": 6.816,
+      "endSec": 10.192,
+      "startFrame": 204,
+      "endFrame": 306,
+      "text": "I had to win. Mom was sick, and the city had the only doctor."
     },
     "b4": {
-      "startSec": 9.79,
-      "endSec": 12.981,
-      "startFrame": 294,
-      "endFrame": 389,
-      "text": "Then she wrote EVERYONE DANCES, and nobody could stop dancing."
-    },
-    "w1": {
-      "startSec": 13.081,
-      "endSec": 13.723,
-      "startFrame": 392,
-      "endFrame": 412,
-      "text": "DANCE!"
+      "startSec": 10.272,
+      "endSec": 12.635,
+      "startFrame": 308,
+      "endFrame": 379,
+      "text": "June was my best friend. Dex had never won."
     },
     "b5": {
-      "startSec": 13.843,
-      "endSec": 17.231,
-      "startFrame": 415,
-      "endFrame": 517,
-      "text": "Nobody ever touches the chalk, and nobody erases that board."
+      "startSec": 12.695,
+      "endSec": 13.948,
+      "startFrame": 381,
+      "endFrame": 418,
+      "text": "The whole school came to watch."
     },
     "b6": {
-      "startSec": 17.311,
-      "endSec": 20.674,
-      "startFrame": 519,
-      "endFrame": 620,
-      "text": "But my little brother Noah was so tired, he fell asleep standing up."
+      "startSec": 14.008,
+      "endSec": 15.375,
+      "startFrame": 420,
+      "endFrame": 461,
+      "text": "The gate opened. We ran."
     },
     "b7": {
-      "startSec": 20.794,
-      "endSec": 23.565,
-      "startFrame": 624,
-      "endFrame": 707,
-      "text": "Mrs. Vale smiled and wrote one soft word: SLEEP."
+      "startSec": 15.435,
+      "endSec": 18.52,
+      "startFrame": 463,
+      "endFrame": 556,
+      "text": "I was faster than both of them... until June's leg gave out."
     },
     "b8": {
-      "startSec": 23.685,
-      "endSec": 26.107,
-      "startFrame": 711,
-      "endFrame": 783,
-      "text": "Noah woke up, marched to the board, and wiped it away."
+      "startSec": 18.58,
+      "endSec": 20.674,
+      "startFrame": 557,
+      "endFrame": 620,
+      "text": "The rules said keep running. I turned back."
     },
     "b9": {
-      "startSec": 26.207,
-      "endSec": 29.095,
-      "startFrame": 786,
-      "endFrame": 873,
-      "text": "The board went black, then the chalk started writing by itself."
-    },
-    "w2": {
-      "startSec": 29.235,
-      "endSec": 29.832,
-      "startFrame": 877,
-      "endFrame": 895,
-      "text": "NOAH!"
+      "startSec": 20.774,
+      "endSec": 22.861,
+      "startFrame": 623,
+      "endFrame": 686,
+      "text": "I matched her pace. Dex passed us both."
     },
     "b10": {
-      "startSec": 29.952,
-      "endSec": 33.039,
-      "startFrame": 899,
-      "endFrame": 991,
-      "text": "It wrote NOAH, then DETENTION, then one last word: FOREVER."
+      "startSec": 22.941,
+      "endSec": 25.175,
+      "startFrame": 688,
+      "endFrame": 755,
+      "text": "He screamed: you lost your mom's only chance!"
     },
     "b11": {
-      "startSec": 33.199,
-      "endSec": 36.38,
-      "startFrame": 996,
-      "endFrame": 1091,
-      "text": "Next morning, Noah's seat was empty, and nobody remembered him."
+      "startSec": 25.235,
+      "endSec": 26.641,
+      "startFrame": 757,
+      "endFrame": 799,
+      "text": "But at the gate, Dex stopped."
     },
     "b12": {
-      "startSec": 36.54,
-      "endSec": 39.275,
-      "startFrame": 1096,
-      "endFrame": 1178,
-      "text": "I ran outside, and the school sign now read NOAH WHO?"
+      "startSec": 26.761,
+      "endSec": 29.305,
+      "startFrame": 803,
+      "endFrame": 879,
+      "text": "Years ago, he stopped for a friend and lost everything."
     },
     "b13": {
-      "startSec": 39.395,
-      "endSec": 42.201,
-      "startFrame": 1182,
-      "endFrame": 1266,
-      "text": "So I grabbed the chalk and wrote the only thing I had left."
+      "startSec": 29.445,
+      "endSec": 31.121,
+      "startFrame": 883,
+      "endFrame": 934,
+      "text": "Now I had the choice he never got."
     },
     "b14": {
-      "startSec": 42.321,
-      "endSec": 44.849,
-      "startFrame": 1270,
-      "endFrame": 1345,
-      "text": "The board answered slowly: ONLY THE TEACHER WRITES."
-    },
-    "w3": {
-      "startSec": 45.009,
-      "endSec": 45.709,
-      "startFrame": 1350,
-      "endFrame": 1371,
-      "text": "ERASE!"
+      "startSec": 31.241,
+      "endSec": 33.292,
+      "startFrame": 937,
+      "endFrame": 999,
+      "text": "June slowed down... and waved me ahead."
     },
     "b15": {
-      "startSec": 45.829,
-      "endSec": 48.615,
-      "startFrame": 1375,
-      "endFrame": 1458,
-      "text": "So I erased every rule, one chalk line at a time."
+      "startSec": 33.392,
+      "endSec": 34.601,
+      "startFrame": 1002,
+      "endFrame": 1038,
+      "text": "I could have stopped. I didn't."
     },
     "b16": {
-      "startSec": 48.715,
-      "endSec": 53.846,
-      "startFrame": 1461,
-      "endFrame": 1615,
-      "text": "Noah walked back in, every word disappeared, and one line appeared: TODAY'S RULE. What would you write?"
+      "startSec": 34.721,
+      "endSec": 37.026,
+      "startFrame": 1042,
+      "endFrame": 1111,
+      "text": "I won. I chose my mom. She got treatment."
+    },
+    "b17": {
+      "startSec": 37.126,
+      "endSec": 40.191,
+      "startFrame": 1114,
+      "endFrame": 1206,
+      "text": "That night, June's family was sent away. She looked back once."
+    },
+    "b18": {
+      "startSec": 40.291,
+      "endSec": 43.044,
+      "startFrame": 1209,
+      "endFrame": 1291,
+      "text": "She said she'd do the same. I still don't know if that's true."
+    },
+    "b19": {
+      "startSec": 43.204,
+      "endSec": 45.719,
+      "startFrame": 1296,
+      "endFrame": 1372,
+      "text": "Who would you have saved: your mom... or your best friend?"
     }
   },
   "captions": [
     {
       "startFrame": 4,
-      "endFrame": 14,
+      "endFrame": 16,
       "text": "In this"
     },
     {
-      "startFrame": 15,
-      "endFrame": 35,
-      "text": "town, whatever"
+      "startFrame": 17,
+      "endFrame": 36,
+      "text": "town, three"
     },
     {
-      "startFrame": 36,
-      "endFrame": 51,
-      "text": "the teacher"
+      "startFrame": 37,
+      "endFrame": 52,
+      "text": "kids race"
     },
     {
-      "startFrame": 52,
-      "endFrame": 71,
-      "text": "writes on the"
+      "startFrame": 53,
+      "endFrame": 64,
+      "text": "for one"
     },
     {
-      "startFrame": 72,
-      "endFrame": 94,
-      "text": "chalkboard comes"
+      "startFrame": 65,
+      "endFrame": 84,
+      "text": "ticket out."
     },
     {
-      "startFrame": 95,
-      "endFrame": 102,
-      "text": "true."
+      "startFrame": 85,
+      "endFrame": 101,
+      "text": "The winner"
     },
     {
-      "startFrame": 107,
-      "endFrame": 128,
-      "text": "Our teacher,"
+      "startFrame": 102,
+      "endFrame": 117,
+      "text": "saves one"
     },
     {
-      "startFrame": 129,
+      "startFrame": 118,
+      "endFrame": 130,
+      "text": "family."
+    },
+    {
+      "startFrame": 133,
       "endFrame": 146,
-      "text": "Mrs. Vale,"
+      "text": "The other"
     },
     {
       "startFrame": 147,
-      "endFrame": 163,
-      "text": "writes one"
+      "endFrame": 157,
+      "text": "two are"
     },
     {
-      "startFrame": 164,
-      "endFrame": 181,
-      "text": "rule every"
+      "startFrame": 158,
+      "endFrame": 172,
+      "text": "sent away."
     },
     {
-      "startFrame": 182,
-      "endFrame": 208,
-      "text": "single morning."
+      "startFrame": 173,
+      "endFrame": 188,
+      "text": "This year,"
     },
     {
-      "startFrame": 212,
-      "endFrame": 224,
-      "text": "Last week"
+      "startFrame": 189,
+      "endFrame": 196,
+      "text": "I was"
     },
     {
-      "startFrame": 225,
+      "startFrame": 197,
+      "endFrame": 202,
+      "text": "one."
+    },
+    {
+      "startFrame": 204,
+      "endFrame": 213,
+      "text": "I had"
+    },
+    {
+      "startFrame": 214,
+      "endFrame": 226,
+      "text": "to win."
+    },
+    {
+      "startFrame": 227,
       "endFrame": 238,
-      "text": "she wrote"
+      "text": "Mom was"
     },
     {
       "startFrame": 239,
       "endFrame": 255,
-      "text": "NO TALKING,"
+      "text": "sick, and"
     },
     {
       "startFrame": 256,
-      "endFrame": 265,
-      "text": "and the"
+      "endFrame": 270,
+      "text": "the city"
     },
     {
-      "startFrame": 266,
-      "endFrame": 279,
-      "text": "room went"
+      "startFrame": 271,
+      "endFrame": 283,
+      "text": "had the"
     },
     {
-      "startFrame": 280,
-      "endFrame": 290,
-      "text": "silent."
+      "startFrame": 284,
+      "endFrame": 305,
+      "text": "only doctor."
     },
     {
-      "startFrame": 294,
-      "endFrame": 306,
-      "text": "Then she"
+      "startFrame": 308,
+      "endFrame": 322,
+      "text": "June was"
     },
     {
-      "startFrame": 307,
-      "endFrame": 329,
-      "text": "wrote EVERYONE"
+      "startFrame": 323,
+      "endFrame": 334,
+      "text": "my best"
     },
     {
-      "startFrame": 330,
-      "endFrame": 347,
-      "text": "DANCES, and"
+      "startFrame": 335,
+      "endFrame": 354,
+      "text": "friend. Dex"
     },
     {
-      "startFrame": 348,
-      "endFrame": 367,
-      "text": "nobody could"
+      "startFrame": 355,
+      "endFrame": 371,
+      "text": "had never"
     },
     {
-      "startFrame": 368,
-      "endFrame": 388,
-      "text": "stop dancing."
+      "startFrame": 372,
+      "endFrame": 378,
+      "text": "won."
     },
     {
-      "startFrame": 392,
-      "endFrame": 415,
-      "text": "DANCE!"
+      "startFrame": 381,
+      "endFrame": 392,
+      "text": "The whole"
     },
     {
-      "startFrame": 415,
-      "endFrame": 434,
-      "text": "Nobody ever"
+      "startFrame": 393,
+      "endFrame": 406,
+      "text": "school came"
     },
     {
-      "startFrame": 435,
-      "endFrame": 454,
-      "text": "touches the"
+      "startFrame": 407,
+      "endFrame": 417,
+      "text": "to watch."
     },
     {
-      "startFrame": 455,
-      "endFrame": 472,
-      "text": "chalk, and"
+      "startFrame": 420,
+      "endFrame": 433,
+      "text": "The gate"
     },
     {
-      "startFrame": 473,
-      "endFrame": 496,
-      "text": "nobody erases"
+      "startFrame": 434,
+      "endFrame": 460,
+      "text": "opened. We ran."
     },
     {
-      "startFrame": 497,
-      "endFrame": 516,
-      "text": "that board."
+      "startFrame": 463,
+      "endFrame": 470,
+      "text": "I was"
     },
     {
-      "startFrame": 519,
-      "endFrame": 539,
-      "text": "But my little"
+      "startFrame": 471,
+      "endFrame": 489,
+      "text": "faster than"
     },
     {
-      "startFrame": 540,
-      "endFrame": 558,
-      "text": "brother Noah"
+      "startFrame": 490,
+      "endFrame": 514,
+      "text": "both of them..."
     },
     {
-      "startFrame": 559,
-      "endFrame": 579,
-      "text": "was so tired,"
+      "startFrame": 515,
+      "endFrame": 534,
+      "text": "until June's"
     },
     {
-      "startFrame": 580,
-      "endFrame": 590,
-      "text": "he fell"
+      "startFrame": 535,
+      "endFrame": 548,
+      "text": "leg gave"
     },
     {
-      "startFrame": 591,
-      "endFrame": 614,
-      "text": "asleep standing"
+      "startFrame": 549,
+      "endFrame": 555,
+      "text": "out."
     },
     {
-      "startFrame": 615,
+      "startFrame": 557,
+      "endFrame": 571,
+      "text": "The rules"
+    },
+    {
+      "startFrame": 572,
+      "endFrame": 585,
+      "text": "said keep"
+    },
+    {
+      "startFrame": 586,
+      "endFrame": 611,
+      "text": "running. I turned"
+    },
+    {
+      "startFrame": 612,
       "endFrame": 619,
-      "text": "up."
+      "text": "back."
     },
     {
-      "startFrame": 624,
-      "endFrame": 640,
-      "text": "Mrs. Vale"
+      "startFrame": 623,
+      "endFrame": 638,
+      "text": "I matched"
     },
     {
-      "startFrame": 641,
-      "endFrame": 659,
-      "text": "smiled and"
+      "startFrame": 639,
+      "endFrame": 654,
+      "text": "her pace."
     },
     {
-      "startFrame": 660,
-      "endFrame": 676,
-      "text": "wrote one"
+      "startFrame": 655,
+      "endFrame": 671,
+      "text": "Dex passed"
     },
     {
-      "startFrame": 677,
-      "endFrame": 695,
-      "text": "soft word:"
+      "startFrame": 672,
+      "endFrame": 685,
+      "text": "us both."
     },
     {
-      "startFrame": 696,
+      "startFrame": 688,
       "endFrame": 706,
-      "text": "SLEEP."
+      "text": "He screamed:"
     },
     {
-      "startFrame": 711,
-      "endFrame": 723,
-      "text": "Noah woke"
+      "startFrame": 707,
+      "endFrame": 719,
+      "text": "you lost"
     },
     {
-      "startFrame": 724,
-      "endFrame": 739,
-      "text": "up, marched"
+      "startFrame": 720,
+      "endFrame": 735,
+      "text": "your mom's"
     },
     {
-      "startFrame": 740,
-      "endFrame": 747,
-      "text": "to the"
+      "startFrame": 736,
+      "endFrame": 754,
+      "text": "only chance!"
     },
     {
-      "startFrame": 748,
-      "endFrame": 762,
-      "text": "board, and"
+      "startFrame": 757,
+      "endFrame": 772,
+      "text": "But at the"
     },
     {
-      "startFrame": 763,
-      "endFrame": 782,
-      "text": "wiped it away."
+      "startFrame": 773,
+      "endFrame": 786,
+      "text": "gate, Dex"
     },
     {
-      "startFrame": 786,
+      "startFrame": 787,
       "endFrame": 798,
-      "text": "The board"
+      "text": "stopped."
     },
     {
-      "startFrame": 799,
-      "endFrame": 815,
-      "text": "went black,"
+      "startFrame": 803,
+      "endFrame": 817,
+      "text": "Years ago,"
     },
     {
-      "startFrame": 816,
-      "endFrame": 826,
-      "text": "then the"
+      "startFrame": 818,
+      "endFrame": 832,
+      "text": "he stopped"
     },
     {
-      "startFrame": 827,
-      "endFrame": 845,
-      "text": "chalk started"
+      "startFrame": 833,
+      "endFrame": 850,
+      "text": "for a friend"
     },
     {
-      "startFrame": 846,
-      "endFrame": 872,
-      "text": "writing by itself."
+      "startFrame": 851,
+      "endFrame": 862,
+      "text": "and lost"
     },
     {
-      "startFrame": 877,
-      "endFrame": 898,
-      "text": "NOAH!"
+      "startFrame": 863,
+      "endFrame": 878,
+      "text": "everything."
     },
     {
-      "startFrame": 899,
-      "endFrame": 911,
-      "text": "It wrote"
+      "startFrame": 883,
+      "endFrame": 897,
+      "text": "Now I had"
     },
     {
-      "startFrame": 912,
-      "endFrame": 928,
-      "text": "NOAH, then"
+      "startFrame": 898,
+      "endFrame": 913,
+      "text": "the choice"
     },
     {
-      "startFrame": 929,
-      "endFrame": 953,
-      "text": "DETENTION, then"
+      "startFrame": 914,
+      "endFrame": 926,
+      "text": "he never"
     },
     {
-      "startFrame": 954,
-      "endFrame": 967,
-      "text": "one last"
+      "startFrame": 927,
+      "endFrame": 933,
+      "text": "got."
     },
     {
-      "startFrame": 968,
-      "endFrame": 990,
-      "text": "word: FOREVER."
+      "startFrame": 937,
+      "endFrame": 955,
+      "text": "June slowed"
     },
     {
-      "startFrame": 996,
-      "endFrame": 1016,
-      "text": "Next morning,"
+      "startFrame": 956,
+      "endFrame": 973,
+      "text": "down... and"
     },
     {
-      "startFrame": 1017,
-      "endFrame": 1034,
-      "text": "Noah's seat"
+      "startFrame": 974,
+      "endFrame": 998,
+      "text": "waved me ahead."
     },
     {
-      "startFrame": 1035,
-      "endFrame": 1050,
-      "text": "was empty,"
+      "startFrame": 1002,
+      "endFrame": 1010,
+      "text": "I could"
     },
     {
-      "startFrame": 1051,
-      "endFrame": 1066,
-      "text": "and nobody"
+      "startFrame": 1011,
+      "endFrame": 1026,
+      "text": "have stopped."
     },
     {
-      "startFrame": 1067,
-      "endFrame": 1090,
-      "text": "remembered him."
+      "startFrame": 1027,
+      "endFrame": 1037,
+      "text": "I didn't."
     },
     {
-      "startFrame": 1096,
-      "endFrame": 1104,
-      "text": "I ran"
+      "startFrame": 1042,
+      "endFrame": 1052,
+      "text": "I won."
     },
     {
-      "startFrame": 1105,
-      "endFrame": 1124,
-      "text": "outside, and"
+      "startFrame": 1053,
+      "endFrame": 1065,
+      "text": "I chose"
     },
     {
-      "startFrame": 1125,
-      "endFrame": 1141,
-      "text": "the school"
+      "startFrame": 1066,
+      "endFrame": 1078,
+      "text": "my mom."
     },
     {
-      "startFrame": 1142,
-      "endFrame": 1155,
-      "text": "sign now"
+      "startFrame": 1079,
+      "endFrame": 1091,
+      "text": "She got"
     },
     {
-      "startFrame": 1156,
-      "endFrame": 1170,
-      "text": "read NOAH"
+      "startFrame": 1092,
+      "endFrame": 1110,
+      "text": "treatment."
     },
     {
-      "startFrame": 1171,
-      "endFrame": 1177,
-      "text": "WHO?"
+      "startFrame": 1114,
+      "endFrame": 1131,
+      "text": "That night,"
     },
     {
-      "startFrame": 1182,
-      "endFrame": 1200,
-      "text": "So I grabbed"
+      "startFrame": 1132,
+      "endFrame": 1151,
+      "text": "June's family"
     },
     {
-      "startFrame": 1201,
-      "endFrame": 1214,
-      "text": "the chalk"
+      "startFrame": 1152,
+      "endFrame": 1164,
+      "text": "was sent"
     },
     {
-      "startFrame": 1215,
-      "endFrame": 1228,
-      "text": "and wrote"
+      "startFrame": 1165,
+      "endFrame": 1179,
+      "text": "away. She"
     },
     {
-      "startFrame": 1229,
-      "endFrame": 1240,
-      "text": "the only"
+      "startFrame": 1180,
+      "endFrame": 1197,
+      "text": "looked back"
     },
     {
-      "startFrame": 1241,
-      "endFrame": 1257,
-      "text": "thing I had"
+      "startFrame": 1198,
+      "endFrame": 1205,
+      "text": "once."
     },
     {
-      "startFrame": 1258,
-      "endFrame": 1265,
-      "text": "left."
+      "startFrame": 1209,
+      "endFrame": 1219,
+      "text": "She said"
     },
     {
-      "startFrame": 1270,
+      "startFrame": 1220,
+      "endFrame": 1237,
+      "text": "she'd do the"
+    },
+    {
+      "startFrame": 1238,
+      "endFrame": 1256,
+      "text": "same. I still"
+    },
+    {
+      "startFrame": 1257,
+      "endFrame": 1270,
+      "text": "don't know"
+    },
+    {
+      "startFrame": 1271,
       "endFrame": 1283,
-      "text": "The board"
+      "text": "if that's"
     },
     {
       "startFrame": 1284,
+      "endFrame": 1290,
+      "text": "true."
+    },
+    {
+      "startFrame": 1296,
       "endFrame": 1308,
-      "text": "answered slowly:"
+      "text": "Who would"
     },
     {
       "startFrame": 1309,
-      "endFrame": 1321,
-      "text": "ONLY THE"
+      "endFrame": 1319,
+      "text": "you have"
     },
     {
-      "startFrame": 1322,
-      "endFrame": 1344,
-      "text": "TEACHER WRITES."
+      "startFrame": 1320,
+      "endFrame": 1334,
+      "text": "saved: your"
     },
     {
-      "startFrame": 1350,
-      "endFrame": 1374,
-      "text": "ERASE!"
+      "startFrame": 1335,
+      "endFrame": 1354,
+      "text": "mom... or your"
     },
     {
-      "startFrame": 1375,
-      "endFrame": 1394,
-      "text": "So I erased"
-    },
-    {
-      "startFrame": 1395,
-      "endFrame": 1415,
-      "text": "every rule,"
-    },
-    {
-      "startFrame": 1416,
-      "endFrame": 1431,
-      "text": "one chalk"
-    },
-    {
-      "startFrame": 1432,
-      "endFrame": 1448,
-      "text": "line at a"
-    },
-    {
-      "startFrame": 1449,
-      "endFrame": 1457,
-      "text": "time."
-    },
-    {
-      "startFrame": 1461,
-      "endFrame": 1478,
-      "text": "Noah walked"
-    },
-    {
-      "startFrame": 1479,
-      "endFrame": 1491,
-      "text": "back in,"
-    },
-    {
-      "startFrame": 1492,
-      "endFrame": 1507,
-      "text": "every word"
-    },
-    {
-      "startFrame": 1508,
-      "endFrame": 1533,
-      "text": "disappeared, and"
-    },
-    {
-      "startFrame": 1534,
-      "endFrame": 1546,
-      "text": "one line"
-    },
-    {
-      "startFrame": 1547,
-      "endFrame": 1574,
-      "text": "appeared: TODAY'S"
-    },
-    {
-      "startFrame": 1575,
-      "endFrame": 1590,
-      "text": "RULE. What"
-    },
-    {
-      "startFrame": 1591,
-      "endFrame": 1605,
-      "text": "would you"
-    },
-    {
-      "startFrame": 1606,
-      "endFrame": 1614,
-      "text": "write?"
+      "startFrame": 1355,
+      "endFrame": 1371,
+      "text": "best friend?"
     }
   ]
 }
