@@ -945,3 +945,346 @@ def test_old_specification_without_character_placements_still_loads():
     loaded_spec = SceneSpecification.from_dict(data)
 
     assert loaded_spec.character_placements == []
+
+
+def make_character_action(
+    *,
+    id="action_1",
+    scene_id="morning",
+    character_id="character_1",
+    action="walk",
+    channel="locomotion",
+    description="Walk towards the workplace.",
+    start_frame=0,
+    end_frame=30,
+    event_id=None,
+    target_character_id=None,
+    target_anchor_id=None,
+    interrupts_action_id=None,
+):
+    """Create a CharacterActionSpec for testing."""
+    from scripts.shorts.production.scene_spec import CharacterActionSpec
+
+    return CharacterActionSpec(
+        id=id,
+        scene_id=scene_id,
+        character_id=character_id,
+        action=action,
+        channel=channel,
+        description=description,
+        start_frame=start_frame,
+        end_frame=end_frame,
+        event_id=event_id,
+        target_character_id=target_character_id,
+        target_anchor_id=target_anchor_id,
+        interrupts_action_id=interrupts_action_id,
+    )
+
+
+def test_character_action_can_be_created():
+    action = make_character_action()
+
+    assert action.id == "action_1"
+    assert action.character_id == "character_1"
+    assert action.action == "walk"
+    assert action.channel == "locomotion"
+
+
+def test_character_actions_are_serialized():
+    spec = make_valid_spec()
+    spec.character_actions = [make_character_action()]
+
+    data = spec.to_dict()
+
+    assert len(data["character_actions"]) == 1
+    assert data["character_actions"][0]["action"] == "walk"
+    assert data["character_actions"][0]["channel"] == "locomotion"
+
+
+def test_actions_on_different_channels_can_overlap():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(
+            id="walking",
+            action="walk",
+            channel="locomotion",
+            start_frame=0,
+            end_frame=60,
+        ),
+        make_character_action(
+            id="talking",
+            action="talk",
+            channel="facial",
+            description="Talk while walking.",
+            start_frame=15,
+            end_frame=50,
+        ),
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert not any("overlap" in error.lower() for error in errors)
+
+
+def test_overlapping_actions_on_same_channel_are_rejected():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(
+            id="walking_1",
+            action="walk",
+            channel="locomotion",
+            start_frame=0,
+            end_frame=60,
+        ),
+        make_character_action(
+            id="walking_2",
+            action="run",
+            channel="locomotion",
+            start_frame=40,
+            end_frame=90,
+        ),
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert any("overlap" in error.lower() for error in errors)
+
+
+def test_sequential_actions_on_same_channel_are_allowed():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(
+            id="walking",
+            action="walk",
+            channel="locomotion",
+            start_frame=0,
+            end_frame=40,
+        ),
+        make_character_action(
+            id="running",
+            action="run",
+            channel="locomotion",
+            start_frame=40,
+            end_frame=80,
+        ),
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert not any("overlap" in error.lower() for error in errors)
+
+
+def test_character_action_can_interrupt_previous_action():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(
+            id="walking",
+            action="walk",
+            channel="locomotion",
+            start_frame=0,
+            end_frame=40,
+        ),
+        make_character_action(
+            id="stopping",
+            action="stop",
+            channel="locomotion",
+            start_frame=40,
+            end_frame=60,
+            interrupts_action_id="walking",
+        ),
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert not any("interrupt" in error.lower() for error in errors)
+    assert not any("overlap" in error.lower() for error in errors)
+
+
+def test_interruption_requires_existing_action():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(
+            id="stopping",
+            action="stop",
+            channel="locomotion",
+            start_frame=40,
+            end_frame=60,
+            interrupts_action_id="missing_action",
+        ),
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert any("interrupt" in error.lower() for error in errors)
+
+
+def test_interruption_must_target_same_character_and_channel():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(
+            id="walking",
+            action="walk",
+            channel="locomotion",
+            start_frame=0,
+            end_frame=40,
+        ),
+        make_character_action(
+            id="stopping",
+            action="stop",
+            channel="body",
+            start_frame=40,
+            end_frame=60,
+            interrupts_action_id="walking",
+        ),
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert any("interrupt" in error.lower() for error in errors)
+
+
+def test_interrupted_action_must_end_when_interrupting_action_starts():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(
+            id="walking",
+            action="walk",
+            channel="locomotion",
+            start_frame=0,
+            end_frame=50,
+        ),
+        make_character_action(
+            id="stopping",
+            action="stop",
+            channel="locomotion",
+            start_frame=40,
+            end_frame=60,
+            interrupts_action_id="walking",
+        ),
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert any("interrupt" in error.lower() for error in errors)
+
+
+def test_character_action_with_unknown_scene_is_rejected():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(scene_id="missing_scene")
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert any("scene" in error.lower() for error in errors)
+
+
+def test_character_action_with_unknown_character_is_rejected():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(character_id="missing_character")
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert any("character" in error.lower() for error in errors)
+
+
+def test_character_action_with_unknown_event_is_rejected():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(event_id="missing_event")
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert any("event" in error.lower() for error in errors)
+
+
+def test_character_action_with_unknown_target_character_is_rejected():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(target_character_id="missing_character")
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert any("target" in error.lower() for error in errors)
+
+
+def test_character_action_with_unknown_target_anchor_is_rejected():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(target_anchor_id="missing_anchor")
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert any("anchor" in error.lower() for error in errors)
+
+
+def test_character_action_outside_scene_is_rejected():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(
+            start_frame=0,
+            end_frame=100,
+        )
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert any("outside" in error.lower() for error in errors)
+
+
+def test_character_action_json_round_trip():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(
+            id="walking",
+            action="walk",
+            channel="locomotion",
+            start_frame=0,
+            end_frame=60,
+            event_id=spec.events[0].id,
+        )
+    ]
+
+    loaded_spec = SceneSpecification.from_dict(spec.to_dict())
+
+    assert loaded_spec == spec
+
+
+def test_old_specification_without_character_actions_still_loads():
+    data = make_valid_spec().to_dict()
+    data.pop("character_actions", None)
+
+    loaded_spec = SceneSpecification.from_dict(data)
+
+    assert loaded_spec.character_actions == []
+
+def test_interruption_from_different_scene_is_rejected():
+    spec = make_valid_spec()
+    spec.character_actions = [
+        make_character_action(
+            id="walking",
+            scene_id="morning",
+            action="walk",
+            channel="locomotion",
+            start_frame=0,
+            end_frame=40,
+        ),
+        make_character_action(
+            id="stopping",
+            scene_id="day",
+            action="stop",
+            channel="locomotion",
+            start_frame=40,
+            end_frame=60,
+            interrupts_action_id="walking",
+        ),
+    ]
+
+    errors = validate_scene_spec(spec)
+
+    assert any("interrupt" in error.lower() for error in errors)

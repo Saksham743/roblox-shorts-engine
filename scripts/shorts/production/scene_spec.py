@@ -70,6 +70,16 @@ VALID_TIMES_OF_DAY = {
     "night",
 }
 
+VALID_CHARACTER_ACTION_CHANNELS = {
+    "locomotion",
+    "body",
+    "gesture",
+    "facial",
+    "gaze",
+    "interaction",
+    "prop",
+}
+
 
 # ---------------------------------------------------------------------
 # Specification data models
@@ -125,6 +135,24 @@ class CharacterPlacementSpec:
     anchor_id: str
     start_frame: int
     end_frame: int
+
+
+@dataclass
+class CharacterActionSpec:
+    """Defines one character's performance on a specific action channel."""
+
+    id: str
+    scene_id: str
+    character_id: str
+    action: str
+    channel: str
+    description: str
+    start_frame: int
+    end_frame: int
+    event_id: str | None = None
+    target_character_id: str | None = None
+    target_anchor_id: str | None = None
+    interrupts_action_id: str | None = None
 
 
 @dataclass
@@ -198,6 +226,7 @@ class SceneSpecification:
     shots: list[ShotSpec]
     environment_anchors: list[EnvironmentAnchorSpec] = field(default_factory=list)
     character_placements: list[CharacterPlacementSpec] = field(default_factory=list)
+    character_actions: list[CharacterActionSpec] = field(default_factory=list)
     audio: AudioSpec = field(default_factory=AudioSpec)
     schema_version: str = SCENE_SPEC_VERSION
 
@@ -240,6 +269,7 @@ class SceneSpecification:
             "shots",
             "environment_anchors",
             "character_placements",
+            "character_actions",
             "audio",
             "schema_version",
         }
@@ -481,6 +511,12 @@ class SceneSpecification:
             "character_placements",
         )
 
+        character_actions = build_record_list(
+            CharacterActionSpec,
+            data.get("character_actions", []),
+            "character_actions",
+        )
+
         scenes = build_record_list(
             SceneSpec,
             data["scenes"],
@@ -534,6 +570,7 @@ class SceneSpecification:
             shots=shots,
             environment_anchors=environment_anchors,
             character_placements=character_placements,
+            character_actions=character_actions,
             audio=audio,
             schema_version=schema_version,
         )
@@ -857,6 +894,10 @@ def validate_scene_spec(
         "character placements",
     )
     check_unique_ids(
+        spec.character_actions,
+        "character actions",
+    )
+    check_unique_ids(
         spec.audio.sound_effects,
         "sound effects",
     )
@@ -885,6 +926,9 @@ def validate_scene_spec(
 
     for item in spec.character_placements:
         check_non_empty_id(item, "Character placement")
+
+    for item in spec.character_actions:
+        check_non_empty_id(item, "Character action")
 
     for item in spec.audio.sound_effects:
         check_non_empty_id(item, "Sound effect")
@@ -942,6 +986,11 @@ def validate_scene_spec(
     anchor_by_id = {
         anchor.id: anchor
         for anchor in spec.environment_anchors
+    }
+
+    event_by_id = {
+        event.id: event
+        for event in spec.events
     }
 
     # -------------------------------------------------------------
@@ -1034,6 +1083,159 @@ def validate_scene_spec(
                 errors.append(
                     f"Character placements '{previous.id}' and "
                     f"'{current.id}' overlap for character "
+                    f"'{character_id}' in scene '{scene_id}'."
+                )
+
+    # -------------------------------------------------------------
+    # Character action validation
+    # -------------------------------------------------------------
+
+    action_by_id = {
+        action.id: action
+        for action in spec.character_actions
+    }
+
+    actions_by_character_channel: dict[
+        tuple[str, str, str], list[CharacterActionSpec]
+    ] = {}
+
+    for action in spec.character_actions:
+        check_frame_range(
+            action.start_frame,
+            action.end_frame,
+            f"Character action '{action.id}'",
+        )
+        check_non_empty_text(
+            action.action,
+            f"Character action '{action.id}' action",
+        )
+        check_non_empty_text(
+            action.description,
+            f"Character action '{action.id}' description",
+        )
+        check_allowed_value(
+            action.channel,
+            VALID_CHARACTER_ACTION_CHANNELS,
+            f"Character action '{action.id}' channel",
+        )
+
+        parent_scene = scene_by_id.get(action.scene_id)
+
+        if parent_scene is None:
+            errors.append(
+                f"Character action '{action.id}' references unknown scene "
+                f"'{action.scene_id}'."
+            )
+        elif (
+            action.start_frame < parent_scene.start_frame
+            or action.end_frame > parent_scene.end_frame
+        ):
+            errors.append(
+                f"Character action '{action.id}' falls outside "
+                f"scene '{parent_scene.id}'."
+            )
+
+        if action.character_id not in character_ids:
+            errors.append(
+                f"Character action '{action.id}' references unknown character "
+                f"'{action.character_id}'."
+            )
+
+        if action.event_id is not None:
+            event = event_by_id.get(action.event_id)
+            if event is None:
+                errors.append(
+                    f"Character action '{action.id}' references unknown event "
+                    f"'{action.event_id}'."
+                )
+            elif event.scene_id != action.scene_id:
+                errors.append(
+                    f"Character action '{action.id}' references event "
+                    f"'{event.id}' from a different scene."
+                )
+
+        if action.target_character_id is not None:
+            if action.target_character_id not in character_ids:
+                errors.append(
+                    f"Character action '{action.id}' references unknown target "
+                    f"character '{action.target_character_id}'."
+                )
+
+        if action.target_anchor_id is not None:
+            target_anchor = anchor_by_id.get(action.target_anchor_id)
+            if target_anchor is None:
+                errors.append(
+                    f"Character action '{action.id}' references unknown target "
+                    f"anchor '{action.target_anchor_id}'."
+                )
+            elif (
+                parent_scene is not None
+                and target_anchor.environment_id != parent_scene.environment_id
+            ):
+                errors.append(
+                    f"Character action '{action.id}' targets anchor "
+                    f"'{target_anchor.id}' from a different environment."
+                )
+
+        key = (action.scene_id, action.character_id, action.channel)
+        actions_by_character_channel.setdefault(key, []).append(action)
+
+    for action in spec.character_actions:
+        if action.interrupts_action_id is None:
+            continue
+
+        interrupted = action_by_id.get(action.interrupts_action_id)
+
+        if interrupted is None:
+            errors.append(
+                f"Character action '{action.id}' interrupts unknown action "
+                f"'{action.interrupts_action_id}'."
+            )
+            continue
+
+        if interrupted.id == action.id:
+            errors.append(
+                f"Character action '{action.id}' cannot interrupt itself."
+            )
+            continue
+
+        if interrupted.scene_id != action.scene_id:
+            errors.append(
+                f"Character action '{action.id}' cannot interrupt an action "
+                f"from a different scene."
+            )
+
+        if (
+            interrupted.character_id != action.character_id
+            or interrupted.channel != action.channel
+        ):
+            errors.append(
+                f"Character action '{action.id}' can only interrupt an action "
+                f"for the same character and channel."
+            )
+
+        if interrupted.end_frame != action.start_frame:
+            errors.append(
+                f"Interrupted action '{interrupted.id}' must end when "
+                f"interrupting action '{action.id}' starts."
+            )
+
+    for (scene_id, character_id, channel), actions in (
+        actions_by_character_channel.items()
+    ):
+        ordered_actions = sorted(
+            actions,
+            key=lambda item: (item.start_frame, item.end_frame, item.id),
+        )
+
+        for previous, current in zip(
+            ordered_actions,
+            ordered_actions[1:],
+        ):
+            if current.start_frame < previous.end_frame:
+                errors.append(
+                    f"Character actions '{previous.id}' and '{current.id}' "
+                    f"overlap on channel '{channel}' for character "
                     f"'{character_id}' in scene '{scene_id}'."
                 )
 
